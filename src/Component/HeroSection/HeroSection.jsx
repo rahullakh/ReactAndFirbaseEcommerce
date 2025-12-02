@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
-import { searchData } from "../Searchbar/Searchbar";
+import { useState, useEffect, useContext } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import myContext from "../../context/MyContext";
 
 const HeroSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const context = useContext(myContext);
+  const {getAllProduct} = context;
   useEffect(() => {
     const timer = setInterval(() => {
       nextSlide();
@@ -13,21 +15,21 @@ const HeroSection = () => {
   }, [currentIndex]);
 
   const nextSlide = () => {
-    setCurrentIndex((prev) => (prev === searchData.length - 1 ? 0 : prev + 1));
+    setCurrentIndex((prev) => (prev === getAllProduct.length - 1 ? 0 : prev + 1));
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev === 0 ? searchData.length - 1 : prev - 1));
+    setCurrentIndex((prev) => (prev === 0 ? getAllProduct.length - 1 : prev - 1));
   };
 
-  const currentItem = searchData[currentIndex];
+  const currentItem = getAllProduct[currentIndex];
   return (
     <section className="relative w-full min-h-[80vh] sm:min-h-[90vh] bg-gray-100 overflow-hidden flex items-center justify-center">
       <div className="w-full max-w-7xl h-full flex flex-col lg:flex-row items-center justify-between bg-white rounded-md shadow-lg transition-all duration-700 ease-in-out py-2">
         <div className="flex-1 flex items-center justify-center w-full">
           <img
-            src={currentItem.image}
-            alt={currentItem.name}
+            src={currentItem.productImg}
+            alt={currentItem.title}
             className="
           w-[90%]
           sm:w-[80%]
@@ -49,7 +51,7 @@ const HeroSection = () => {
 
         <div className="flex-1 flex flex-col items-center lg:items-start justify-center text-center lg:text-left p-6 sm:p-10">
           <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">
-            {currentItem.name}
+            {currentItem.title}
           </h3>
 
           <p className="text-gray-600 mt-3 text-sm sm:text-base md:text-lg leading-relaxed max-w-md">
@@ -81,7 +83,7 @@ const HeroSection = () => {
       </div>
 
       <div className="absolute bottom-5 sm:bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2">
-        {searchData.map((_, index) => (
+        {getAllProduct.map((_, index) => (
           <div
             key={index}
             onClick={() => setCurrentIndex(index)}
