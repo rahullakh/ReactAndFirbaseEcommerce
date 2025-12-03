@@ -63,7 +63,7 @@ const CartPage = () => {
     }),
   });
 
-  const buyNowOrder = () => {
+   const buyNowOrder = () => {
     if (
       addressInfo.name === "" ||
       addressInfo.address === "" ||

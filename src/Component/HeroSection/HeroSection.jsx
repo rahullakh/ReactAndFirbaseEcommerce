@@ -1,93 +1,105 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext} from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import myContext from "../../context/MyContext";
-
+import { useNavigate } from "react-router-dom";
 const HeroSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const context = useContext(myContext);
-  const {getAllProduct} = context;
-  useEffect(() => {
-    const timer = setInterval(() => {
-      nextSlide();
-    }, 5000);
 
-    return () => clearInterval(timer);
-  }, [currentIndex]);
+  const context = useContext(myContext);
+  const { Loading, getAllProduct } = context;
+  
+  const navigate = useNavigate();
+
+  // ------------------- Safeguard -------------------
+  if (Loading || getAllProduct.length === 0) {
+    return <h2 className="text-center py-10">Loading...</h2>;
+  }
+  // -------------------------------------------------
 
   const nextSlide = () => {
-    setCurrentIndex((prev) => (prev === getAllProduct.length - 1 ? 0 : prev + 1));
+    setCurrentIndex((prev) =>
+      prev === getAllProduct.length - 1 ? 0 : prev + 1
+    );
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev === 0 ? getAllProduct.length - 1 : prev - 1));
+    setCurrentIndex((prev) =>
+      prev === 0 ? getAllProduct.length - 1 : prev - 1
+    );
   };
+
+
 
   const currentItem = getAllProduct[currentIndex];
   return (
     <section className="relative w-full min-h-[80vh] sm:min-h-[90vh] bg-gray-100 overflow-hidden flex items-center justify-center">
-      <div className="w-full max-w-7xl h-full flex flex-col lg:flex-row items-center justify-between bg-white rounded-md shadow-lg transition-all duration-700 ease-in-out py-2">
-        <div className="flex-1 flex items-center justify-center w-full">
+      <div className="w-full max-w-7xl h-full flex flex-col lg:flex-row items-center justify-between bg-white rounded-md shadow-lg">
+        <div
+          onClick={() => navigate(`/productInfo/${currentItem.id}`)}
+          className="flex-1 flex items-center justify-center w-full"
+        >
           <img
             src={currentItem.productImg}
             alt={currentItem.title}
             className="
-          w-[90%]
-          sm:w-[80%]
-          md:w-[70%]
-          lg:w-[90%]
-          h-auto
-          sm:h-[350px]
-          md:h-[420px]
-          lg:h-[500px]
-          object-cover
-          rounded-md
-          shadow-xl
-          mx-auto
-          transition-all
-          duration-500
-        "
+    w-[70%]
+    sm:w-[60%]
+    md:w-[55%]
+    lg:w-[50%]
+    max-h-[350px]
+    sm:max-h-[400px]
+    md:max-h-[450px]
+    lg:max-h-[500px]
+    object-contain
+    rounded-md
+    shadow-xl
+    mx-auto
+    transition-all
+    duration-500
+  "
           />
         </div>
 
-        <div className="flex-1 flex flex-col items-center lg:items-start justify-center text-center lg:text-left p-6 sm:p-10">
-          <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">
+        <div className="flex-1 flex flex-col items-center lg:items-start justify-center p-6 sm:p-10">
+          <h3 className="text-3xl font-bold text-gray-800">
             {currentItem.title}
           </h3>
-
-          <p className="text-gray-600 mt-3 text-sm sm:text-base md:text-lg leading-relaxed max-w-md">
+          <p className="text-gray-600 mt-3 text-lg max-w-md">
             {currentItem.desc}
           </p>
-
-          <p className="font-semibold text-lg sm:text-xl mt-4 text-[#32cd32]">
-            {currentItem.price}
+          <p className="font-semibold text-xl mt-4 text-green-600">
+            ₹{currentItem.price}
           </p>
 
-          <button className="mt-4 sm:mt-3 bg-[#25c625] text-white px-5 py-2 sm:px-4 cursor-pointer sm:py-3 rounded-lg hover:bg-[#2cf516] transition-all duration-300">
+          <button
+            type="button"
+            className=" bg-[#31cd32] hover:bg-[#27ed27] text-white px-4 py-2 rounded"
+          >
             Buy Now
           </button>
         </div>
 
         <button
           onClick={prevSlide}
-          className="absolute left-3 top-1/2 transform -translate-y-1/2 bg-gray-600/60 text-white p-2 sm:p-3 rounded-full hover:bg-gray-800 transition"
+          className="absolute left-3 top-1/2 -translate-y-1/2 bg-gray-600/60 text-white p-3 rounded-full"
         >
-          <FaChevronLeft size={18} />
+          <FaChevronLeft size={20} />
         </button>
 
         <button
           onClick={nextSlide}
-          className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-gray-600/60 text-white p-2 sm:p-3 rounded-full hover:bg-gray-800 transition"
+          className="absolute right-3 top-1/2 -translate-y-1/2 bg-gray-600/60 text-white p-3 rounded-full"
         >
-          <FaChevronRight size={18} />
+          <FaChevronRight size={20} />
         </button>
       </div>
 
-      <div className="absolute bottom-5 sm:bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2">
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-3">
         {getAllProduct.map((_, index) => (
           <div
             key={index}
             onClick={() => setCurrentIndex(index)}
-            className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full cursor-pointer transition-all duration-300 ${
+            className={`w-3 h-3 rounded-full cursor-pointer transition ${
               index === currentIndex ? "bg-blue-600 scale-110" : "bg-gray-300"
             }`}
           ></div>
@@ -96,5 +108,4 @@ const HeroSection = () => {
     </section>
   );
 };
-
 export default HeroSection;
