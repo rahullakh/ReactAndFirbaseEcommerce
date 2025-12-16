@@ -63,10 +63,10 @@ const AddProduct = () => {
 
     setLoading(true);
     try {
-      // select realtimedatabse root me products/
+     
       const productRef = ref(db, "products");
       
-      // data ko push kiya jaha rha hai products/ folder me
+     
       await push(productRef, Product);
 
       alert("✅ Product added successfully!");

@@ -25,7 +25,7 @@ const BuyOrderInfo = ({ addressInfo, setAddInfo, buyNowOrder, closePopup }) => {
             />
           </div>
 
-          {/* Address */}
+         
           <div>
             <label className="text-gray-600 text-sm font-medium">Address</label>
             <input

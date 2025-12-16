@@ -15,54 +15,7 @@ const Login = () => {
     email: "",
     password: "",
   });
-  // firbaseStore way
-  // const userLogin = async (e) => {
-  //   e.preventDefault();
-  //   if (!user.email || !user.password) {
-  //     alert("All Fields are required");
-  //   }
-  //   setLoading(true);
-
-  //   try {
-  //     const users = await signInWithEmailAndPassword(
-  //       auth,
-  //       user.email,
-  //       user.password
-  //     );
-
-  //     try {
-  //       const q = query(
-  //         collection(db, "user"),
-  //         where("uid" === users?.user?.uid)
-  //       );
-
-  //       const data = onSnapshot(q, (qSnaps) => {
-  //         let user;
-  //         qSnaps.forEach((doc) => (user = doc.data()));
-  //         localStorage.setItem("users", JSON.stringify(user));
-  //         setUser({
-  //           email: "",
-  //           password: "",
-  //         });
-  //         // toast.success("Login Successfully...");
-  //         setLoading(false);
-  //         if (user.role === "user") {
-  //           navigate("/userDash");
-  //         } else {
-  //           navigate("/adminDash");
-  //         }
-  //       });
-  //       return ()=> data;
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //     setLoading(false);
-  //   }
-  // };
   
-  // realtimeDatabse
   const userLogin = async (e) => {
   e.preventDefault();
 
@@ -74,27 +27,27 @@ const Login = () => {
   setLoading(true);
 
   try {
-    // 1️⃣ Firebase Auth se user login
+   
     const userCredential = await signInWithEmailAndPassword(
       auth,
       user.email,
       user.password
     );
 
-    const uid = userCredential.user.uid; // unique user id
+    const uid = userCredential.user.uid; 
 
-    // 2️⃣ Realtime Database ka root reference.
+    
     const dbRef = ref(db);
-    const snapshot = await get(child(dbRef, `users/${uid}`)); //us specific user ka path.
+    const snapshot = await get(child(dbRef, `users/${uid}`)); 
 
     if (snapshot.exists()) {
-      // yeh line user ka pura object leker laati hai
+    
       const userData = snapshot.val();
 
-      // 3️⃣ LocalStorage me user info save kar lo
+  
       localStorage.setItem("users", JSON.stringify(userData));
 
-      // 4️⃣ Form clear karo
+     
       setUser({
         email: "",
         password: "",
@@ -102,7 +55,7 @@ const Login = () => {
 
       setLoading(false);
 
-      // 5️⃣ Role ke hisab se navigate karo
+    
       if (userData.role === "user") {
         navigate("/user-Dash");
       } else {

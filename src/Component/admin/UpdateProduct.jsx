@@ -56,8 +56,7 @@ const UpdateProduct = () => {
     }),
   });
 
-  // 🔹 Existing data fetch for edit form prefill
-  // jo bhi products db me pada hai usko fetch krke lao
+ 
   useEffect(() => {
     const fetchProduct = async () => {
       setLoading(true);
@@ -80,7 +79,7 @@ const UpdateProduct = () => {
     fetchProduct();
   }, [id]);
 
-  // 🔹 Update function
+ 
   const handleUpdateProduct = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -88,7 +87,7 @@ const UpdateProduct = () => {
     try {
       await update(ref(db, `products/${id}`), updateProduct);
       alert("Product updated successfully!");
-      getAllProductData(); // Refresh product list
+      getAllProductData(); 
       navigate("/admin-Dash");
     } catch (error) {
       console.error("Error updating product:", error);

@@ -7,7 +7,7 @@ import { child, get, ref } from "firebase/database";
 import Loader from "../../Component/Loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, deleteFromCart } from "../../redux/cartSlice";
-// import { productsCard } from "../../Component/Products/HomePageProductCard";
+
 const ProductInfo = () => {
   const context = useContext(myContext);
   const { Loading, setLoading } = context;

@@ -32,12 +32,7 @@ const UserDetail = () => {
               <th className="border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-900 text-center">
               Date
               </th>
-              {/* <th
-          className="border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700 text-center"
-          colSpan={1}
-        >
-          Actions
-        </th> */}
+        
             </tr>
           </thead>
 
@@ -63,16 +58,6 @@ const UserDetail = () => {
                   <td className="border border-gray-300 px-4 py-2 text-center">
                    {item.date}
                   </td>
-                  {/* <td className="border border-gray-300 px-4 py-2 text-center">
-          <button className="text-blue-600 font-medium hover:text-blue-700 transition">
-            Edit
-          </button>
-        </td> */}
-                  {/* <td className="border border-gray-300 px-4 py-2 text-center">
-          <button className="text-red-600 font-medium hover:text-red-700 transition">
-            Delete
-          </button>
-        </td> */}
                 </tr>
               );
             })}

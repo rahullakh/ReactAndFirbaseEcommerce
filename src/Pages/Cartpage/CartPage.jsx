@@ -73,7 +73,7 @@ const CartPage = () => {
       return alert("All Fields are required");
     }
 
-    // store object for orderinfo
+    
     const orderInfo = {
       cartItems,
       addressInfo,

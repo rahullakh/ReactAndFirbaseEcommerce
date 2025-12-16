@@ -4,30 +4,7 @@ import { ref, query, orderByChild,get, onValue, off, remove } from "firebase/dat
 import { db } from "../firbase/FirebaseConfig";
 const MyState = ({ children }) => {
   const [Loading, setLoading] = useState(false);
-  // const[getAllProduct,setAllProduct] = useState([]);
 
-  // const getAllProductData = async ()=>{
-  //   setLoading(true);
-  //   try {
-  //     const q = query(
-  //       collection(db,"products"),
-  //       orderBy('time')
-  //     );
-  //     const data = onSnapshot(q,(querSnaps)=>{
-  //       let productsData = [];
-  //       querSnaps.forEach(element => {
-  //         productsData.push({...element.data(), id:element.id});
-  //       });
-  //       setAllProduct(productsData);
-  //       setLoading(false);
-  //     });
-  //     return ()=> data;
-  //   } catch (error) {
-  //    alert(error.message);
-  //   }finally{
-  //      setLoading(false);
-  //   }
-  // }
 
   const [getAllProduct, setAllProduct] = useState([]);
   const [getAllOrder,setAllOrders] = useState([]);
@@ -97,7 +74,6 @@ const deleteOrder = async (id) => {
   setLoading(true);
 
   try {
-    // Firebase path → orders/{id}
     await remove(ref(db, `orders/${id}`));
     alert("Order Deleted Successfully!");
     getAllOrderFun();
@@ -117,7 +93,7 @@ const getAllUser = async () => {
   try {
     const usersRef = ref(db, "users");
 
-    // 👉 Sort by "name" field
+   
     const usersQuery = query(usersRef, orderByChild("name"));
 
     const snapshot = await get(usersQuery);

@@ -5,21 +5,21 @@ import SearchBar from "../SearchBar/SearchBar";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
-  // 🔹 Get user from localStorage
+
   const user = JSON.parse(localStorage.getItem("users"));
 
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
-  // 🔹 Logout function
+  
   const userLogOut = () => {
-    localStorage.removeItem("users"); // only remove user data
+    localStorage.removeItem("users"); 
     navigate("/login");
   };
 
   const cartItems = useSelector((state) => state.cart);
 
-  // 🔹 Navigation list
+
   const navList = (
     <ul className="flex flex-col lg:flex-row lg:space-x-6 space-y-4 lg:space-y-0 text-white font-medium text-md px-5">
       <li>
@@ -28,14 +28,14 @@ const Navbar = () => {
         </Link>
       </li>
 
-      {/* All Products */}
+
       <li>
         <Link to="/allProduct" onClick={() => setOpen(false)}>
           All Products
         </Link>
       </li>
 
-      {/* Dashboard Links (Conditional by Role) */}
+ 
       {user?.role === "user" && (
         <li>
           <Link to="/user-Dash" onClick={() => setOpen(false)}>
@@ -52,14 +52,14 @@ const Navbar = () => {
         </li>
       )}
 
-      {/* Cart */}
+      
       <li>
         <Link to="/cart" onClick={() => setOpen(false)}>
           Cart({cartItems.length})
         </Link>
       </li>
 
-      {/* Signup / Login buttons */}
+    
       {!user && (
         <>
           <li>
@@ -83,7 +83,7 @@ const Navbar = () => {
         </>
       )}
 
-      {/* Logout Button */}
+   
       {user && (
         <li className="cursor-pointer" onClick={userLogOut}>
           Logout

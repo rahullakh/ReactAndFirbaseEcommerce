@@ -10,11 +10,11 @@ const HeroSection = () => {
   
   const navigate = useNavigate();
 
-  // ------------------- Safeguard -------------------
+  
   if (Loading || getAllProduct.length === 0) {
     return <h2 className="text-center py-10">Loading...</h2>;
   }
-  // -------------------------------------------------
+  
 
   const nextSlide = () => {
     setCurrentIndex((prev) =>

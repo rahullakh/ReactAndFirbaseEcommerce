@@ -3,14 +3,12 @@ import myContext from "../../context/MyContext";
 const OrderDetail = () => {
   const context = useContext(myContext);
   const { getAllOrder, deleteOrder } = context;
-  // console.log(getAllOrder);
+ 
   return (
     <div>
       <div className="flex items-center justify-between lg:py-2">
         <h1 className="text-xl font-semibold">All Order</h1>
-        {/* <button className="bg-[#31cd31] font-semibold  text-white text-sm px-4 py-2 rounded-lg hover:bg-[#05cf05] transition-colors">
-          + Add Order
-        </button> */}
+        
       </div>
       <div className="w-full overflow-x-auto scrollbar-hide">
         <table className="min-w-full border border-gray-300 rounded-lg">

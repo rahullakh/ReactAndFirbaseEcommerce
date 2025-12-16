@@ -104,7 +104,7 @@ const UserDashBoard = () => {
 
                   return (
                     <React.Fragment key={order.id}>
-                      {/* LEFT DIV - Order Info */}
+                     
                       <div className="left bg-gray-200 pt-8 lg:pt-10 pl-8 lg:pl-12 space-y-3 border rounded-md">
                         <div>
                           <h2 className="font-bold">Order ID</h2>
@@ -138,8 +138,7 @@ const UserDashBoard = () => {
                         </div>
                       </div>
 
-                      {/* MID DIV - Cart Items */}
-                      {/* MID SECTION */}
+                     
                       <div className="mid border-r-2 pr-3 flex flex-col sm:flex-row items-start justify-start">
                         <ul
                           role="list"
@@ -161,7 +160,7 @@ const UserDashBoard = () => {
                                 key={id}
                                 className="grid grid-cols-1 sm:grid-cols-2 gap-6 py-6 items-start"
                               >
-                                {/* LEFT IMAGE */}
+                               
                                 <div className="w-full h-60 sm:h-40 rounded-lg overflow-hidden border">
                                   <img
                                     src={productImg}
@@ -170,9 +169,8 @@ const UserDashBoard = () => {
                                   />
                                 </div>
 
-                                {/* RIGHT CONTENT */}
                                 <div className="flex flex-col justify-between h-full space-y-3">
-                                  {/* Title + Price */}
+                                  
                                   <div>
                                     <div className="flex justify-between font-semibold text-gray-900">
                                       <h3 className="text-lg">{title}</h3>
@@ -186,7 +184,7 @@ const UserDashBoard = () => {
                                     </p>
                                   </div>
 
-                                  {/* Quantity Controls + Remove */}
+                               
                                   <div className="flex items-center justify-between pt-2">
                                     <div className="flex items-center space-x-2">
                                       <button
@@ -222,7 +220,7 @@ const UserDashBoard = () => {
                         </ul>
                       </div>
 
-                      {/* RIGHT SECTION */}
+                     
                       <div className="right bg-gray-100 p-6 border rounded-md min-w-[220px]">
                         <h2 className="font-bold mb-3 text-lg">
                           Price Details

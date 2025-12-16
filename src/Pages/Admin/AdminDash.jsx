@@ -7,7 +7,7 @@ import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import myContext from "../../context/MyContext";
 const AdminDash = () => {
     const user = JSON.parse(localStorage.getItem("users"));
-  // console.log(user);
+  
   const {name,email,date,role} = user;
   const context = useContext(myContext);
   const {getAllProduct, getAllOrder, allUser} = context;

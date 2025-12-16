@@ -28,17 +28,17 @@ const SIgnup = () => {
 
     setLoading(true);
     try {
-      // ✅ Step 1:Firebase Authentication me user create krega
+     
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         user.email,
         user.password
       );
 
-      // ✅ Step 2: Get unique user id from auth
+    
       const uid = userCredential.user.uid;
 
-      // ✅ Step 3: Create data to store in Realtime DB
+ 
       const userData = {
         name: user.name,
         email: user.email,
@@ -51,10 +51,9 @@ const SIgnup = () => {
         }),
       };
 
-      // ✅ Step 4: 7️⃣ Realtime Database me data save karna
+  
       await set(ref(db, "users/" + uid), userData);
 
-      // ✅ Step 5: Clear form and navigate
       setUser({ name: "", email: "", password: "" });
       alert("Signup Successfully...");
       navigate("/login");

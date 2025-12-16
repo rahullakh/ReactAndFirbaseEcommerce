@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer className="bg-gray-900 text-gray-100 py-6">
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 px-4">
-        {/* Brand Section */}
+     
         <div className="flex flex-col sm:flex-row items-center gap-2">
           <h2 className="text-xl font-semibold tracking-wide pr-3 border-r-2 border-gray-500">
             E-Shop
@@ -18,9 +18,9 @@ const Footer = () => {
           </p>
         </div>
 
-        {/* Social Icons */}
+       
         <div className="flex items-center justify-center gap-4">
-          {/* GitHub */}
+          
           <a href="https://github.com/rahullakh" target="_blank">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +36,7 @@ const Footer = () => {
             </svg>
           </a>
 
-          {/* Instagram */}
+         
           <a
             href="https://www.instagram.com/iamrahullakhera84/"
             target="_blank"
@@ -55,7 +55,7 @@ const Footer = () => {
             </svg>
           </a>
 
-          {/* LinkedIn */}
+          
           <a
             href="https://www.linkedin.com/in/rahul-lakhera-309a20364/"
             target="_blank"

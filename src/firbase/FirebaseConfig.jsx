@@ -1,10 +1,10 @@
 
-// Import the functions you need from the SDKs you need
+
 import { initializeApp } from "firebase/app";
 import {getAuth} from "firebase/auth";
 import { getDatabase } from "firebase/database";
 
-// Your web app's Firebase configuration
+
 const firebaseConfig = {
   apiKey: "AIzaSyD7ZxHWmKc13BR8bnGvt-XFKGmCf23oBkU",
   authDomain: "myecommerce-55d0f.firebaseapp.com",
@@ -15,8 +15,8 @@ const firebaseConfig = {
   databaseURL: "https://myecommerce-55d0f-default-rtdb.asia-southeast1.firebasedatabase.app"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig); //connect react app and firbase app
+
+const app = initializeApp(firebaseConfig); 
 const db = getDatabase(app);
 const  auth = getAuth(app);
 export {db, auth};

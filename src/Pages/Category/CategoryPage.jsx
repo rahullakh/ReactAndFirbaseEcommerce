@@ -9,7 +9,7 @@ const CategoryPage = () => {
   const { categoryname } = useParams();
   const { getAllProduct, Loading } = useContext(myContext);
 
-  // Filter Products
+ 
   const filteredProducts = getAllProduct.filter((p) =>
     p.category.toLowerCase().includes(categoryname.toLowerCase())
   );
@@ -36,14 +36,14 @@ const CategoryPage = () => {
     <Layout>
       <div className="py-6 lg:py-8">
 
-        {/* Page Title */}
+     
         <div className="text-center mb-10">
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 capitalize">
             {categoryname}
           </h1>
         </div>
 
-        {/* Loader */}
+       
         {Loading && (
           <div className="flex justify-center py-10">
             <Loader />
@@ -103,7 +103,7 @@ const CategoryPage = () => {
                 </div>
               ))
             ) : (
-              // Not Found Center
+              
               <div className="col-span-full flex justify-center items-center h-64">
                 <h1 className="text-2xl sm:text-3xl font-bold text-gray-700">
                   {categoryname} products not found 😓

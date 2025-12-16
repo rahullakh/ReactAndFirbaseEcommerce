@@ -10,11 +10,11 @@ const ProductDetail = () => {
   const deleteProduct = async (id)=>{
     setLoading(true);
     try {
-    const productRef = ref(db, `products/${id}`); // specific product ka path
-    await remove(productRef); // firebase se delete karo
+    const productRef = ref(db, `products/${id}`); 
+    await remove(productRef); 
 
     alert("✅ Product Deleted Successfully...");
-    getAllProductData(); // data refresh
+    getAllProductData(); 
   } catch (error) {
     console.error("❌ Failed deleting product:", error);
     alert(error.message);
