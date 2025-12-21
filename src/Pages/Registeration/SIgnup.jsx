@@ -53,7 +53,7 @@ const SIgnup = () => {
 
   
       await set(ref(db, "users/" + uid), userData);
-
+ 
       setUser({ name: "", email: "", password: "" });
       alert("Signup Successfully...");
       navigate("/login");
