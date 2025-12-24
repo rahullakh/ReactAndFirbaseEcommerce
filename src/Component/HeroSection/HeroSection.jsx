@@ -33,7 +33,7 @@ const HeroSection = () => {
   const currentItem = getAllProduct[currentIndex];
   return (
     <section className="relative w-full min-h-[80vh] sm:min-h-[90vh] bg-gray-100 overflow-hidden flex items-center justify-center">
-      <div className="w-full max-w-7xl h-full flex flex-col lg:flex-row items-center justify-between bg-white rounded-md shadow-lg">
+      <div className="w-full max-w-7xl h-full flex flex-col lg:flex-row items-center justify-between bg-white rounded-md shadow-lg py-20 lg:14">
         <div
           onClick={() => navigate(`/productInfo/${currentItem.id}`)}
           className="flex-1 flex items-center justify-center w-full"
@@ -73,7 +73,7 @@ const HeroSection = () => {
 
           <button
             type="button"
-            className=" bg-[#31cd32] hover:bg-[#27ed27] text-white px-4 py-2 rounded"
+            className=" bg-[#31cd32] hover:bg-[#27ed27] mt-2 text-white px-4 py-2 rounded"
           >
             Buy Now
           </button>
