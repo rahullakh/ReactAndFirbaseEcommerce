@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "./Pages/Home/HomePage";
-import NoPage from "./Pages/NoPage/Nopage";
+import NoPage from "./Pages/NoPage/NoPage";
 import ProductInfo from "./Pages/ProductInfo/ProductInfo";
 import ScrolTop from "./Component/ScrolTop/ScrolTop";
 import CartPage from "./Pages/Cartpage/CartPage";
