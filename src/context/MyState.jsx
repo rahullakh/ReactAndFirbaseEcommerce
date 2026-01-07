@@ -12,17 +12,17 @@ const MyState = ({ children }) => {
  const getAllProductData = async () => {
     setLoading(true);
     try {
-      // kis form me data get hoga
+      
       const q = query(ref(db, "products"), orderByChild("time"));
       
-      // yeh ek eventLinstener hai jisme ek callback func hai jab bhi data change hoga yeh fir se chelega
+     
       const unsubscribe = onValue(q, (snapshot) => {
-        const data = snapshot.val(); //object form me
+        const data = snapshot.val(); 
         let productsData = [];
 
         if (data) {
          
-          productsData = Object.keys(data).map((key) => ({ //convert array form me
+          productsData = Object.keys(data).map((key) => ({ 
             id: key, 
             ...data[key],
           }));
