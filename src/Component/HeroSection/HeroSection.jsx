@@ -4,12 +4,14 @@ import myContext from "../../context/MyContext";
 import { useNavigate } from "react-router-dom";
 const HeroSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-
+  
   const context = useContext(myContext);
   const { Loading, getAllProduct } = context;
   
   const navigate = useNavigate();
-
+  const user = JSON.parse(localStorage.getItem("users"));
+ 
+  
   
   if (Loading || getAllProduct.length === 0) {
     return <h2 className="text-center py-10">Loading...</h2>;
@@ -31,11 +33,17 @@ const HeroSection = () => {
 
 
   const currentItem = getAllProduct[currentIndex];
+   const handleBuy = ()=>{
+    if(user){
+      navigate(`/productInfo/${currentItem.id}`)
+    }else{
+       navigate("/login");
+    }
+  }
   return (
     <section className="relative w-full min-h-[80vh] sm:min-h-[90vh] bg-gray-100 overflow-hidden flex items-center justify-center">
       <div className="w-full max-w-7xl h-full flex flex-col lg:flex-row items-center justify-between bg-white rounded-md shadow-lg py-20 lg:14">
         <div
-          onClick={() => navigate(`/productInfo/${currentItem.id}`)}
           className="flex-1 flex items-center justify-center w-full"
         >
           <img
@@ -73,6 +81,7 @@ const HeroSection = () => {
 
           <button
             type="button"
+            onClick={handleBuy}
             className=" bg-[#31cd32] hover:bg-[#27ed27] mt-2 text-white px-4 py-2 rounded"
           >
             Buy Now
