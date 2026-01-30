@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import MyContext from "./MyContext";
-import { ref, query, orderByChild,get, onValue, off, remove } from "firebase/database";
+import { ref, query, orderByChild,get, onValue, off, remove, push, set } from "firebase/database";
 import { db } from "../firbase/FirebaseConfig";
 const MyState = ({ children }) => {
   const [Loading, setLoading] = useState(false);
@@ -118,6 +118,30 @@ const getAllUser = async () => {
     setLoading(false);
   }
 };
+ 
+  const buyNowOrder = async (user, cartItems) => {
+    if (!cartItems || cartItems.length === 0) return false;
+    setLoading(true);
+    try {
+      const ordersRef = ref(db, "orders");
+      const newOrderRef = push(ordersRef);
+      const newOrder = {
+        userId: user.uid,
+        cartItems,
+        date: new Date().toLocaleString(),
+        status: "confirmed",
+        timestamp: Date.now(),
+      };
+      await set(newOrderRef, newOrder);
+      await getAllOrderFun(); // refresh context
+      setLoading(false);
+      return true;
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+      return false;
+    }
+  };
 
   useEffect(()=>{
      getAllProductData();
@@ -134,6 +158,7 @@ const getAllUser = async () => {
       ,getAllProductData,
       getAllOrder,
       deleteOrder,
+      buyNowOrder,
       allUser
       }}>
       {children}
