@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { db } from "../../firbase/FirebaseConfig";
 import Loader from "../../Component/Loader/Loader";
 import {ref,push,serverTimestamp } from "firebase/database";
-import { Link } from "react-router-dom";
+
 const categoryList = [
   {
     name:"fashion"
@@ -135,7 +135,7 @@ const AddProduct = () => {
                     categoryList.map((val,index)=>{
                       const {name} = val
                       return (
-                        <option key={index} className="first-letter:uppercase">{name}</option>
+                        <option key={index} value={name} className="first-letter:uppercase">{name}</option>
                       )
                     })
                   }
