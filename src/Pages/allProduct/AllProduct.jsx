@@ -22,8 +22,8 @@ const AllProduct = () => {
     alert("Added to cart...");
   }
 
-  const deleteCart = (item)=>{
-    dispatch(deleteFromCart(item));
+  const deleteCart = (id)=>{
+    dispatch(deleteFromCart(id));
     alert("Deleted cart..");
   }
 
@@ -82,7 +82,7 @@ const AllProduct = () => {
                      
                        {cartItems.some((p) => p.id === item.id) ? (
                       <button
-                        onClick={() => deleteCart(item)}
+                        onClick={() => deleteCart(item.id)}
                         className="bg-[#31cd31] font-semibold w-full text-white text-sm px-4 py-2 rounded-lg hover:bg-[#05cf05] transition-colors"
                       >
                         Delete to Cart
