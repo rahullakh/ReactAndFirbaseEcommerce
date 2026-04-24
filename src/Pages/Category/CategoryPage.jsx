@@ -13,7 +13,12 @@ const CategoryPage = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart);
 
-  
+
+  const cartIds = useMemo(() => {
+    return new Set(cartItems.map((item) => item.id));
+  }, [cartItems]);
+
+
   const filteredProducts = useMemo(() => {
     if (!getAllProduct) return [];
 
@@ -25,12 +30,11 @@ const CategoryPage = () => {
 
   const addCart = (item) => {
     dispatch(addToCart(item));
-    alert("Added to Cart...");
+    
   };
 
   const deleteCart = (item) => {
     dispatch(deleteFromCart(item));
-    alert("Deleted from Cart...");
   };
 
   useEffect(() => {
@@ -40,14 +44,15 @@ const CategoryPage = () => {
   return (
     <Layout>
       <div className="py-6 lg:py-8">
-      
+
+     
         <div className="text-center mb-10">
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 capitalize">
             {categoryname}
           </h1>
         </div>
 
-      
+       
         {Loading && (
           <div className="flex justify-center py-10">
             <Loader />
@@ -65,11 +70,13 @@ const CategoryPage = () => {
                     key={item.id}
                     className="bg-white shadow-md hover:shadow-xl transition-all rounded-md duration-300 overflow-hidden flex flex-col"
                   >
+                   
                     <div className="relative group">
                       <div className="w-full py-2 px-2 border">
                         <img
                           src={item.productImg}
                           alt={item.title}
+                          loading="lazy" 
                           className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500"
                         />
                       </div>
@@ -79,19 +86,21 @@ const CategoryPage = () => {
                       </span>
                     </div>
 
+              
                     <div className="p-4 flex flex-col flex-grow">
                       <h2 className="text-lg font-semibold text-gray-800 truncate">
                         {item.title}
                       </h2>
 
                       <p className="text-lg font-bold text-gray-900 mb-2">
-                        ${item.price}
+                        ₹{item.price}
                       </p>
 
-                      {cartItems.some((p) => p.id === item.id) ? (
+                     
+                      {cartIds.has(item.id) ? (
                         <button
                           onClick={() => deleteCart(item)}
-                          className="bg-green-500 font-semibold w-full text-white text-sm px-4 py-2 rounded-lg hover:bg-green-600 transition-colors"
+                          className="bg-red-500 font-semibold w-full text-white text-sm px-4 py-2 rounded-lg hover:bg-red-600 transition-colors"
                         >
                           Remove from Cart
                         </button>
