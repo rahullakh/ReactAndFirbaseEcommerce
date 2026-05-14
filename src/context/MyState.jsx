@@ -4,11 +4,10 @@ import { ref, query, orderByChild,get, onValue, off, remove, push, set } from "f
 import { db } from "../firbase/FirebaseConfig";
 const MyState = ({ children }) => {
   const [Loading, setLoading] = useState(false);
-
-
   const [getAllProduct, setAllProduct] = useState([]);
   const [getAllOrder,setAllOrders] = useState([]);
-
+  const[allUser, setUsers] = useState([]);
+  
  const getAllProductData = async () => {
     setLoading(true);
     try {
@@ -85,7 +84,6 @@ const deleteOrder = async (id) => {
   }
 }
 
-const[allUser, setUsers] = useState([]);
 
 const getAllUser = async () => {
   setLoading(true);
@@ -119,7 +117,7 @@ const getAllUser = async () => {
   }
 };
  
-  const buyNowOrder = async (user, cartItems) => {
+const buyNowOrder = async (user, cartItems) => {
     if (!cartItems || cartItems.length === 0) return false;
     setLoading(true);
     try {
@@ -133,7 +131,7 @@ const getAllUser = async () => {
         timestamp: Date.now(),
       };
       await set(newOrderRef, newOrder);
-      await getAllOrderFun(); // refresh context
+      await getAllOrderFun(); 
       setLoading(false);
       return true;
     } catch (error) {
@@ -141,13 +139,13 @@ const getAllUser = async () => {
       setLoading(false);
       return false;
     }
-  };
+};
 
-  useEffect(()=>{
+useEffect(()=>{
      getAllProductData();
      getAllOrderFun();
      getAllUser();
-  },[])
+},[])
 
 
   return (
