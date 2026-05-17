@@ -1,14 +1,14 @@
 import { memo } from "react";
 import { useNavigate } from "react-router-dom";
-import Woman from "../../assets/images/woman.jpg";
-import Shirt from "../../assets/images/shirt.jpg";
-import Jacket from "../../assets/images/jacket.jpg";
-import Mobile from "../../assets/images/mobile.jpg";
-import Laptop from "../../assets/images/laptop.jpg";
-import TV from "../../assets/images/tv.jpg";
-import Shoes from "../../assets/images/Shoes.jpg";
-import Home from "../../assets/images/Home.jpg";
-import Book from "../../assets/images/Book.jpg";
+import Woman from "../../assets/images/woman.webp";
+import Shirt from "../../assets/images/shirt.webp";
+import Jacket from "../../assets/images/jacket.webp";
+import Mobile from "../../assets/images/mobile.webp";
+import Laptop from "../../assets/images/laptop.webp";
+import TV from "../../assets/images/tv.webp";
+import Shoes from "../../assets/images/Shoes.webp";
+import Home from "../../assets/images/Home.webp";
+import Book from "../../assets/images/Book.webp";
 
 
 const category = [

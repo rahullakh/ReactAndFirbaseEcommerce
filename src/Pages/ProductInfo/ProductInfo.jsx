@@ -70,12 +70,12 @@ const ProductInfo = () => {
 
   return (
     <Layout>
-      <section className="py-10 px-4 sm:px-6 bg-gray-50">
-        <div className="flex justify-center">
+      <section className="py-10 px-4 sm:px-6 bg-gray-100">
+        <div className="flex items-center justify-center">
           {Loading && <Loader></Loader>}
         </div>
         <div
-          className="max-w-4xl mx-auto shadow-md px-6 py-6 
+          className="max-w-4xl mx-auto  shadow-md px-6 py-6 
             flex flex-col sm:flex-row items-center sm:items-start 
             justify-between gap-8 bg-white rounded-md"
         >
