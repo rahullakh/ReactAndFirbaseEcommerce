@@ -36,7 +36,7 @@ const categoryList = [
 ];
 const AddProduct = () => {
   const context = useContext(myContext);
-  const { Loading, setLoading } = context;
+  const { Loading,setLoading} = context;
 
   const navigate = useNavigate();
 
@@ -55,6 +55,7 @@ const AddProduct = () => {
     }),
   });
 
+  
   const addProduct = async () => {
     if (
       !Product.title ||

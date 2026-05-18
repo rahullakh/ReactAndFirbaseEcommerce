@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Layout from "../../Component/Layout/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import BuyOrderInfo from "../../Component/BuyOrder/BuyOrderInfo";
@@ -7,15 +7,15 @@ import {
   deleteFromCart,
   incrementQuantity,
 } from "../../redux/cartSlice";
-import { push, ref, serverTimestamp, set } from "firebase/database";
-import { db } from "../../firbase/FirebaseConfig";
+import myContext from "../../context/MyContext";
 
 const CartPage = () => {
+  const {buyNowOrder} = useContext(myContext);
+  
   const cartItems = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
   const [showAddressPopup, setShowAddressPopup] = useState(false);
-  // const navigate = useNavigate();
 
   const deleteCart = (id) => {
     dispatch(deleteFromCart(id));
@@ -43,13 +43,7 @@ const CartPage = () => {
     .reduce((prevValue, currValue) => prevValue + currValue, 0);
 
   const user = JSON.parse(localStorage.getItem("users"));
-  // const handleBuyNowClick = () => {
-  //   if (!user) {
-  //     navigate("/login");
-  //     return;
-  //   }
-  //   setShowAddressPopup(true);
-  // };
+ 
   const [addressInfo, setAddInfo] = useState({
     name: "",
     address: "",
@@ -63,46 +57,25 @@ const CartPage = () => {
     }),
   });
 
-   const buyNowOrder = () => {
-    if (
-      addressInfo.name === "" ||
-      addressInfo.address === "" ||
-      addressInfo.pincode === "" ||
-      addressInfo.mobileNumber === ""
-    ) {
-      return alert("All Fields are required");
-    }
+const handleBuyNow = async () => {
+  const success = await buyNowOrder(user, cartItems, addressInfo);
 
-    
-    const orderInfo = {
-      cartItems,
-      addressInfo,
-      email: user.email,
-      userId: user.uid,
-      status: "confirmed",
-      time: serverTimestamp(),
-      date: new Date().toLocaleString("en-US", {
-        month: "short",
-        day: "2-digit",
-        year: "numeric",
-      }),
-    };
-    try {
-      const orderRef = ref(db, "orders");
-      const newOrderRef = push(orderRef);
-      set(newOrderRef, orderInfo);
-      setAddInfo({
-        name: "",
-        address: "",
-        pincode: "",
-        mobileNumber: "",
-      });
-      alert("Order placed successfully!");
-    } catch (error) {
-      console.error("Error storing order:", error);
-      alert("Failed to place order.");
-    }
-  };
+  if (success) {
+    setAddInfo({
+      name: "",
+      address: "",
+      pincode: "",
+      mobileNumber: "",
+    });
+
+    setShowAddressPopup(false);
+
+    alert("Order placed successfully!");
+  } else {
+    alert("Please fill all fields correctly!");
+  }
+};
+
 
   return (
     <Layout>
@@ -229,7 +202,7 @@ const CartPage = () => {
                 <BuyOrderInfo
                   addressInfo={addressInfo}
                   setAddInfo={setAddInfo}
-                  buyNowOrder={buyNowOrder}
+                   handleBuyNow={handleBuyNow}
                   closePopup={() => setShowAddressPopup(false)}
                 />
               )}

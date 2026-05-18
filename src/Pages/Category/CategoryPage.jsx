@@ -18,6 +18,10 @@ const CategoryPage = () => {
     return new Set(cartItems.map((item) => item.id));
   }, [cartItems]);
 
+  console.log(cartIds);
+
+  
+
 
   const filteredProducts = useMemo(() => {
     if (!getAllProduct) return [];
@@ -27,6 +31,9 @@ const CategoryPage = () => {
         p.category?.toLowerCase() === categoryname?.toLowerCase()
     );
   }, [getAllProduct, categoryname]);
+
+  console.log(filteredProducts);
+  
 
   const addCart = (item) => {
     dispatch(addToCart(item));

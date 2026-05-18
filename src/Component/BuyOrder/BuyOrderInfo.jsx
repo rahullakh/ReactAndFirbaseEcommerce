@@ -1,5 +1,5 @@
 
-const BuyOrderInfo = ({ addressInfo, setAddInfo, buyNowOrder, closePopup }) => {
+const BuyOrderInfo = ({ addressInfo, setAddInfo, handleBuyNow, closePopup }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-40 backdrop-blur-sm flex items-center justify-center p-4 z-50">
 
@@ -70,10 +70,7 @@ const BuyOrderInfo = ({ addressInfo, setAddInfo, buyNowOrder, closePopup }) => {
 
             <button
               type="button"
-              onClick={async () => {
-                const success = await buyNowOrder();
-                if (success) closePopup();
-              }}
+              onClick={handleBuyNow}
               className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg font-medium tracking-wide"
             >
               Confirm Order

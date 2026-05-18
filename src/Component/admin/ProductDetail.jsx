@@ -5,7 +5,7 @@ import { ref, remove } from "firebase/database";
 import { db } from "../../firbase/FirebaseConfig";
 const ProductDetail = () => {
   const context = useContext(myContext);
-  const {Loading, setLoading, getAllProduct, getAllProductData} = context;
+  const {Loading, setLoading, getAllProduct} = context;
   const navigate = useNavigate();
   const deleteProduct = async (id)=>{
     setLoading(true);
@@ -14,7 +14,7 @@ const ProductDetail = () => {
     await remove(productRef); 
 
     alert("✅ Product Deleted Successfully...");
-    getAllProductData(); 
+  
   } catch (error) {
     console.error("❌ Failed deleting product:", error);
     alert(error.message);

@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import MyContext from "./MyContext";
-import { ref, query, orderByChild,get, onValue, off, remove, push, set } from "firebase/database";
+import { ref, query, orderByChild,get, onValue, off, remove, push, set, serverTimestamp } from "firebase/database";
 import { db } from "../firbase/FirebaseConfig";
 const MyState = ({ children }) => {
   const [Loading, setLoading] = useState(false);
   const [getAllProduct, setAllProduct] = useState([]);
   const [getAllOrder,setAllOrders] = useState([]);
   const[allUser, setUsers] = useState([]);
-  
- const getAllProductData = async () => {
+  const getAllProductData = async () => {
     setLoading(true);
     try {
       
@@ -117,28 +116,54 @@ const getAllUser = async () => {
   }
 };
  
-const buyNowOrder = async (user, cartItems) => {
-    if (!cartItems || cartItems.length === 0) return false;
-    setLoading(true);
-    try {
-      const ordersRef = ref(db, "orders");
-      const newOrderRef = push(ordersRef);
-      const newOrder = {
-        userId: user.uid,
-        cartItems,
-        date: new Date().toLocaleString(),
-        status: "confirmed",
-        timestamp: Date.now(),
-      };
-      await set(newOrderRef, newOrder);
-      await getAllOrderFun(); 
-      setLoading(false);
-      return true;
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-      return false;
-    }
+const buyNowOrder = async (user, cartItems, addressInfo) => {
+  if (!user) return false;
+
+  if (
+    !cartItems ||
+    cartItems.length === 0 ||
+    !addressInfo ||
+    addressInfo.name === "" ||
+    addressInfo.address === "" ||
+    addressInfo.pincode === "" ||
+    addressInfo.mobileNumber === ""
+  ) {
+    return false;
+  }
+
+  setLoading(true);
+
+  const orderInfo = {
+    cartItems,
+    addressInfo,
+    email: user.email,
+    userId: user.uid,
+    status: "confirmed",
+    time: serverTimestamp(),
+    date: new Date().toLocaleString("en-US", {
+      month: "short",
+      day: "2-digit",
+      year: "numeric",
+    }),
+  };
+
+  try {
+    const orderRef = ref(db, "orders");
+    const newOrderRef = push(orderRef);
+
+    await set(newOrderRef, orderInfo);
+
+    await getAllOrderFun();
+
+    return true;
+
+  } catch (error) {
+    console.log(error);
+    return false;
+
+  } finally {
+    setLoading(false);
+  }
 };
 
 useEffect(()=>{
@@ -150,10 +175,11 @@ useEffect(()=>{
 
   return (
     <MyContext.Provider value={{ 
+     
       Loading,
       setLoading,
-      getAllProduct 
-      ,getAllProductData,
+      getAllProduct,
+      getAllProductData,
       getAllOrder,
       deleteOrder,
       buyNowOrder,
